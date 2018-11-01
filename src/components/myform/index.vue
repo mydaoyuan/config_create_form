@@ -95,7 +95,7 @@ export default {
       })
       return p
     },
-    resetForm(formName) {
+    resetForm() {
       this.$refs[this.id].resetFields()
     }
   }
