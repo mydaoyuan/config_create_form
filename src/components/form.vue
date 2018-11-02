@@ -7,6 +7,18 @@
           <tdy ref="tdy" :value="formdata" :json="json"></tdy>
           <el-button type="primary" @click="submitForm('tdy')">校验</el-button>
           <el-button @click="resetForm('tdy')">重置</el-button>
+          <el-collapse :value="''">
+            <el-collapse-item title="数据模型" name="1">
+              <el-row :gutter="44">
+                <el-col :span="12">
+                  <pre class=" language-javascript">{{json}}</pre>
+                </el-col>
+                <el-col :span="12">
+                  <pre class=" language-javascript">{{formdata}}</pre>
+                </el-col>
+              </el-row>
+            </el-collapse-item>
+          </el-collapse>
         </el-card>
       </el-col>
       <el-col :span="12">
@@ -16,6 +28,18 @@
           </tdy>
           <el-button type="primary" @click="submitForm('tdy1')">校验</el-button>
           <el-button @click="resetForm('tdy1')">重置</el-button>
+          <el-collapse :value="''">
+            <el-collapse-item title="数据模型" name="1">
+              <el-row :gutter="44">
+                <el-col :span="12">
+                  <pre class=" language-javascript">{{json1}}</pre>
+                </el-col>
+                <el-col :span="12">
+                  <pre class=" language-javascript">{{formdata1}}</pre>
+                </el-col>
+              </el-row>
+            </el-collapse-item>
+          </el-collapse>
         </el-card>
         <el-card class="box-card item">
           <h1>插入自定义表单</h1>
@@ -28,6 +52,18 @@
           </tdy>
           <el-button type="primary" @click="submitForm('tdy2')">校验</el-button>
           <el-button @click="resetForm('tdy2')">重置</el-button>
+          <el-collapse :value="''">
+            <el-collapse-item title="数据模型" name="1">
+              <el-row :gutter="44">
+                <el-col :span="12">
+                  <pre class=" language-javascript">{{json2}}</pre>
+                </el-col>
+                <el-col :span="12">
+                  <pre class=" language-javascript">{{formdata2}}</pre>
+                </el-col>
+              </el-row>
+            </el-collapse-item>
+          </el-collapse>
         </el-card>
       </el-col>
     </el-row>

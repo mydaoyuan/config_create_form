@@ -35,7 +35,7 @@ export default {
     const selfId = prename + id
     id++
     return {
-      ruleForm: {},
+      ruleForm: this.value,
       id: selfId,
       name
     }
@@ -46,20 +46,14 @@ export default {
       this.json.map(item => {
         const rule = item.rule
         if (rule) {
-          setValue(rules, item, rule) // 深层次嵌套key情况处理
+          setValue.call(this, rules, item, rule) // 深层次嵌套key情况处理
         }
       })
       return rules
     }
-    // solts() {
-    //   return this.$parent.$slots
-    // }
   },
   created() {
     this.fixData()
-    if (this.json.find(item => item.type == 'solt')) {
-      console.log(this, '是咧')
-    }
   },
   methods: {
     /**
@@ -68,7 +62,7 @@ export default {
     fixData() {
       this.json.map(item => {
         if (item.value !== undefined || item.path) {
-          this.setValue(item.value || '', item)
+          this.setValue.call(this, item.value || '', item)
         }
       })
     },
@@ -76,7 +70,8 @@ export default {
       return getKey(item)
     },
     setValue(val, item) {
-      setValue(this.ruleForm, item, val)
+      setValue.call(this, this.ruleForm, item, val)
+      this.$emit('input', this.ruleForm)
     },
 
     validate() {

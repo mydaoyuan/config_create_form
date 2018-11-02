@@ -17,14 +17,14 @@ export function setValue(model, item, value) {
     while (pathArr.length) {
       let key = pathArr.shift()
       if (!pathArr.length) {
-        model[key] = value
+        this.$set(model, key, value)
         break
       } else if (!model[key]) {
-        model[key] = {}
+        this.$set(model, key, {})
       }
       model = model[key]
     }
   } else {
-    model[path] = value
+    this.$set(model, path, value)
   }
 }
