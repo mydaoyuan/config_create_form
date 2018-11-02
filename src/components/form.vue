@@ -179,6 +179,7 @@ export default {
 <style scoped >
 .warp {
   padding: 30px;
+  text-align: left;
 }
 .item {
   margin-bottom: 40px;
