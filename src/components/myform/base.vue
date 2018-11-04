@@ -19,7 +19,7 @@
     <el-input @change="valueChange" :disabled="isDisabled" type="textarea" v-if="type=='textarea'" v-model="formValue" :placeholder="item.placeholder || '请输入'"></el-input>
 
     <div v-if="item.type == 'solt'">
-      <slot></slot>
+      <slot :scope="item" :name="item.id"></slot>
     </div>
   </span>
 </template>
@@ -58,23 +58,6 @@ export default {
   computed: {
     isDisabled() {
       return this.item.disabled === true ? true : false
-    },
-    solts() {
-      const vm = this
-      let parent = vm.$parent
-      let cur = {}
-      if (parent) {
-        while (parent.$parent) {
-          if (parent.name == 'tdy') {
-            console.log('find father')
-            break
-          } else {
-            parent = parent.$parent
-          }
-        }
-      }
-      console.log(parent.$slots)
-      return parent.$slots
     }
   },
   watch: {
@@ -90,9 +73,7 @@ export default {
     }
   },
   created() {
-    if (this.item.type == 'solt') {
-      console.log(this)
-    }
+
   },
   methods: {
     /**

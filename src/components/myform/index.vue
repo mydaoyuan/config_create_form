@@ -3,7 +3,6 @@
     <el-form :model="ruleForm" :rules="rules" :ref="id" label-width="100px" class="demo-ruleForm">
       <el-form-item v-show="!item.hide" v-for="(item, index) in json" :key="index" :label="item.label" :prop="getKey(item)">
         <mybase @change="setValue($event,item)" :item="item">
-          <!-- <slot v-if="item.type == 'solt'" :name="item.id"></slot> -->
           <div v-if="item.type == 'solt'">
             <slot :scope="item" :name="item.id" v-if="item.type == 'solt'"></slot>
           </div>
