@@ -31,9 +31,12 @@ export default function tdyForm(WrappedComponent) {
       }
     },
     computed: {
+      fixJson() {
+        return preFix(this.json)
+      },
       hocRules() {
         const rules = {}
-        this.json.map(item => {
+        this.fixJson.map(item => {
           const rule = item.rule
           if (rule) {
             setValue.call(this, rules, item, rule) // 深层次嵌套key情况处理
@@ -58,7 +61,7 @@ export default function tdyForm(WrappedComponent) {
           class="demo-ruleForm"
           {...attributes}
         >
-          {this.json.map(item => {
+          {this.fixJson.map(item => {
             return (
               <el-form-item
                 v-show={!item.hide}
@@ -120,7 +123,7 @@ export default function tdyForm(WrappedComponent) {
        * 对数据模型进行处理  如设置默认值 或者形成树状数据结构
        */
       fixData() {
-        this.json.map(item => {
+        this.fixJson.map(item => {
           if (item.value !== undefined || item.path) {
             this.setDataModal.call(this, item.value || '', item)
           }
@@ -164,4 +167,27 @@ function getPromise() {
     resolve: resolveFn,
     reject: rejectFn
   }
+}
+
+function preFix(json) {
+  let temp = []
+  json.map(item => {
+    if (item.children) {
+      unfold(item.children, item.id, temp)
+    } else {
+      temp.push(item)
+    }
+  })
+  return temp
+}
+
+function unfold(arr, path, container) {
+  arr.map(item => {
+    if (item.children) {
+      unfold(item.children, path + '.' + item.id, container)
+    } else {
+      item.path = path
+      container.push(item)
+    }
+  })
 }
