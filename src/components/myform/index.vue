@@ -61,7 +61,7 @@ export default {
     fixData() {
       this.json.map(item => {
         if (item.value !== undefined || item.path) {
-          this.setValue.call(this, item.value || '', item)
+          this.setValue(item.value || '', item)
         }
       })
     },

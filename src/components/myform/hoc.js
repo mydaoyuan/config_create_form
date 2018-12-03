@@ -1,6 +1,7 @@
 /* eslint no-unused-vars:0 */
 
-import base from './base'
+import baseComponent from './baseComponent'
+import rulesFilter from './rulesFilter'
 import { setValue, getKey } from './basefn'
 let prename = 'tdy'
 const name = 'tdy'
@@ -15,7 +16,7 @@ export default function tdyForm(WrappedComponent) {
   return {
     name: name,
     components: {
-      mybase: base
+      baseComponent: baseComponent
     },
     props: {
       ...WrappedComponent.props,
@@ -55,28 +56,24 @@ export default function tdyForm(WrappedComponent) {
         baseComponentslots
       } = this.getRenderData()
       return (
-        <WrappedComponent
-          ref={this.id}
-          label-width="100px"
-          class="demo-ruleForm"
-          {...attributes}
-        >
+        <WrappedComponent ref={this.id} class="demo-ruleForm" {...attributes}>
           {this.fixJson.map(item => {
             return (
               <el-form-item
                 v-show={!item.hide}
                 label={item.label}
+                class={item.formItemClass}
                 prop={this.getKey(item)}
               >
-                <mybase
+                <baseComponent
                   onChange={event => {
-                    this.setDataModal.call(this, event, item)
+                    this.setDataModal(event, item)
                   }}
                   item={item}
                   {...baseComponentAttributes}
                 >
                   {baseComponentslots}
-                </mybase>
+                </baseComponent>
               </el-form-item>
             )
           })}
@@ -104,7 +101,8 @@ export default function tdyForm(WrappedComponent) {
         let newProps = {
           ...this.$props,
           model: this.value,
-          rules: this.hocRules
+          rules: this.hocRules,
+          labelWidth: this.$props.labelWidth || '120px'
         }
         Object.keys(hocProps).map(k => {
           delete newProps[k]
@@ -125,7 +123,7 @@ export default function tdyForm(WrappedComponent) {
       fixData() {
         this.fixJson.map(item => {
           if (item.value !== undefined || item.path) {
-            this.setDataModal.call(this, item.value || '', item)
+            this.setDataModal(item.value || '', item)
           }
         })
       },

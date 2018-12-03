@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "element-ui": "^2.4.9",
+    "node-sass": "^4.10.0",
+    "sass-loader": "^7.1.0",
     "vue": "^2.5.17"
   },
   "devDependencies": {
@@ -17,37 +19,13 @@
     "@vue/cli-service": "^3.0.4",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^5.0.0-0",
     "vue-template-compiler": "^2.5.17"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {
-      "keyword-spacing": "warn",
-      "eqeqeq": "off",
-      "comma-spacing": "warn",
-      "no-multiple-empty-lines": "off",
-      "comma-dangle": "off",
-      "no-debugger": "off",
-      "no-console": "off",
-      "no-multi-str": "warn",
-      "no-new": "off",
-      "padded-blocks": "off",
-      "template-curly-spacing": "off",
-      "yoda": "off",
-      "semi": "off",
-      "space-before-function-paren": 0
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
   },
   "postcss": {
     "plugins": {

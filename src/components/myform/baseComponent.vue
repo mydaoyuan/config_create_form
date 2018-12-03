@@ -1,22 +1,74 @@
 <template>
   <span>
-    <el-input :disabled="isDisabled" v-if="type=='input'" @change="valueChange" v-model="formValue" :placeholder="item.placeholder || '请输入'"></el-input>
+    <el-input
+      :disabled="isDisabled"
+      v-if="type=='input'"
+      @change="valueChange"
+      v-model="formValue"
+      :placeholder="item.placeholder || '请输入'"
+    ></el-input>
 
-    <el-select :disabled="isDisabled" @change="valueChange" v-if="type=='select'" v-model="formValue" :placeholder="item.placeholder || '请选择'">
-      <el-option v-for="option in item.optionList" :key="option.value" :label="option.label" :value="option.value"></el-option>
+    <el-select
+      :disabled="isDisabled"
+      @change="valueChange"
+      v-if="type=='select'"
+      v-model="formValue"
+      :placeholder="item.placeholder || '请选择'"
+    >
+      <el-option
+        v-for="option in item.optionList"
+        :key="option.value"
+        :label="option.label"
+        :value="option.value"
+      ></el-option>
     </el-select>
 
-    <el-switch :disabled="isDisabled" v-if="type=='switch'" v-model="formValue" @change="valueChange"></el-switch>
+    <el-switch
+      :disabled="isDisabled"
+      v-if="type=='switch'"
+      v-model="formValue"
+      @change="valueChange"
+    ></el-switch>
 
-    <el-checkbox-group :disabled="isDisabled" @change="valueChange" v-if="type=='checkbox'" v-model="formValue">
+    <el-checkbox-group
+      :disabled="isDisabled"
+      @change="valueChange"
+      v-if="type=='checkbox'"
+      v-model="formValue"
+    >
       <el-checkbox v-for="(option,index) in item.optionList" :key="index" :label="option.label"></el-checkbox>
     </el-checkbox-group>
 
-    <el-radio-group :disabled="isDisabled" @change="valueChange" v-if="type=='radio'" v-model="formValue">
-      <el-radio v-for="(option,index) in item.optionList" :label="option.value" :key="index">{{option.label}}</el-radio>
+    <el-radio-group
+      :disabled="isDisabled"
+      @change="valueChange"
+      v-if="type=='radio'"
+      v-model="formValue"
+    >
+      <el-radio
+        v-for="(option,index) in item.optionList"
+        :label="option.value"
+        :key="index"
+      >{{option.label}}</el-radio>
     </el-radio-group>
 
-    <el-input @change="valueChange" :disabled="isDisabled" type="textarea" v-if="type=='textarea'" v-model="formValue" :placeholder="item.placeholder || '请输入'"></el-input>
+    <el-input
+      @change="valueChange"
+      :disabled="isDisabled"
+      type="textarea"
+      v-if="type=='textarea'"
+      v-model="formValue"
+      :placeholder="item.placeholder || '请输入'"
+    ></el-input>
+
+    <imgbox
+      @change="valueChange"
+      :disabled="isDisabled"
+      v-if="type=='img'"
+      v-model="formValue"
+      :limit="item.limit"
+      :file-size="1058000"
+    ></imgbox>
 
     <div v-if="item.type == 'solt'">
       <slot :scope="item" :name="item.id"></slot>
@@ -25,9 +77,11 @@
 </template>
 
 <script>
+import imgbox from '../uploadImg/index'
 function noop() {}
 export default {
   name: 'mybase',
+  components: { imgbox },
   props: {
     item: Object, // 单个元素
     change: {
@@ -57,7 +111,7 @@ export default {
   },
   computed: {
     isDisabled() {
-      return this.item.disabled === true ? true : false
+      return this.item.disabled === true
     }
   },
   watch: {
